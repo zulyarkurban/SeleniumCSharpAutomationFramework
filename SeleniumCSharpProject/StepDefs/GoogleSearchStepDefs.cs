@@ -13,7 +13,7 @@ namespace SeleniumCSharpProject.StepDefs;
 public  class GoogleSearchStepDefs:Driver
 {
     private readonly  GoogleHomePage  _homePage=new GoogleHomePage();
-    private readonly IWebDriver _driver = Driver.getWebDriver();
+    private readonly IWebDriver _driver = Driver.GetWebDriver();
     private  WebDriverWait _wait;
     [Given(@"Navigate to google")]
     public void GivenNavigateToGoogle()
@@ -36,9 +36,11 @@ public  class GoogleSearchStepDefs:Driver
     [When(@"Click on first result")]
     public void WhenClickOnFirstResult()
     {
-        IWebElement searchResult = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(_homePage.ResultList));
-        Console.WriteLine($"WebElement \"{searchResult.Text}\" iSpecFlows clicked");
-        searchResult.Click();
+        //IWebElement searchResult = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(_homePage.ResultList));
+       // Console.WriteLine($"WebElement \"{searchResult.Text}\" iSpecFlows clicked");
+        //searchResult.Click();
+        
+        UIHelper.ClickButton(_driver,_homePage.ResultList);
     }
 
     [Then(@"First result page title should contains ""(.*)""")]

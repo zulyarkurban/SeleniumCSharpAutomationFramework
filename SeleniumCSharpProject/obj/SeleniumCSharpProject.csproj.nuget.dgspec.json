@@ -62,6 +62,10 @@
               "target": "Package",
               "version": "[85.0.0, )"
             },
+            "Selenium.Support": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Selenium.WebDriver": {
               "target": "Package",
               "version": "[4.2.0, )"
@@ -81,6 +85,10 @@
             "SpecFlow.NUnit": {
               "target": "Package",
               "version": "[3.9.74, )"
+            },
+            "WebDriverManager": {
+              "target": "Package",
+              "version": "[2.13.0, )"
             },
             "coverlet.collector": {
               "target": "Package",
