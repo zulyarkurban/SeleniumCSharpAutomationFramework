@@ -11,65 +11,65 @@ namespace SeleniumCSharpProject.Utilities;
 
 public class UIHelper
 {
-    public static void ClickButton(IWebDriver driver,By buttonElement)
+    public static void ClickButton(By buttonElement)
     {
-        var button = driver.FindElement(buttonElement);
+        var button = Driver.GetDriver().FindElement(buttonElement);
         button.Click();
     }
 
-    public static string GetTitle(IWebDriver driver)
+    public static string GetTitle()
     {
-        return driver.Title;
+        return Driver.GetDriver().Title;
     }
 
-    public static string GetUrl(IWebDriver driver)
+    public static string GetUrl()
     {
-        return driver.Url;
+        return Driver.GetDriver().Url;
     }
 
-    public static void SwitchToWindow(IWebDriver driver,string tabName)
+    public static void SwitchToWindow(string tabName)
     {
-        var currentTab = driver.CurrentWindowHandle;
-        ReadOnlyCollection<string> allTabs = driver.WindowHandles;
+        var currentTab = Driver.GetDriver().CurrentWindowHandle;
+        ReadOnlyCollection<string> allTabs = Driver.GetDriver().WindowHandles;
         foreach (var tab  in allTabs)
         {
             if (tab.Contains(tabName))
             {
-                driver.SwitchTo().Window(tab);
+                Driver.GetDriver().SwitchTo().Window(tab);
             }
         }
     }
 
-    public static void SelectByText(IWebDriver driver, By element, string dropdownText)
+    public static void SelectByText(By element, string dropdownText)
     {
-        var dropDownList = driver.FindElement(element);
+        var dropDownList = Driver.GetDriver().FindElement(element);
         var  select = new SelectElement(dropDownList);
         select.SelectByText(dropdownText);
     }
 
-    public static void SelectByIndex(IWebDriver driver, By element, int index)
+    public static void SelectByIndex( By element, int index)
     {
-        var dropDownList = driver.FindElement(element);
+        var dropDownList = Driver.GetDriver().FindElement(element);
         var  select = new SelectElement(dropDownList);
         select.SelectByIndex(index);
     }
-    public static void SelectByValue(IWebDriver driver, By element, string value)
+    public static void SelectByValue( By element, string value)
     {
-        var dropDownList = driver.FindElement(element);
+        var dropDownList = Driver.GetDriver().FindElement(element);
         var  select = new SelectElement(dropDownList);
         select.SelectByValue(value);
     }
 
-    public static IList<IWebElement> GetAllOptions(IWebDriver driver, By element)
+    public static IList<IWebElement> GetAllOptions(By element)
     {
-        var dropDownList = driver.FindElement(element);
+        var dropDownList = Driver.GetDriver().FindElement(element);
         var  select = new SelectElement(dropDownList);
         return select.Options;
     }
     
-    public static void AcceptAlert(IWebDriver driver)
+    public static void AcceptAlert()
     {
-        var alert = driver.SwitchTo().Alert();
+        var alert = Driver.GetDriver().SwitchTo().Alert();
         alert.Accept();
     }
     public static void DismissAlert(IWebDriver driver)
@@ -77,31 +77,31 @@ public class UIHelper
         var alert = driver.SwitchTo().Alert();
         alert.Dismiss();
     }
-    public static string GetAlertText(IWebDriver driver)
+    public static string GetAlertText()
     {
-        var alert = driver.SwitchTo().Alert();
+        var alert = Driver.GetDriver().SwitchTo().Alert();
         return alert.Text;
     }
     
-    public static void SendTextToAlert(IWebDriver driver,string text)
+    public static void SendTextToAlert(string text)
     {
-        var alert = driver.SwitchTo().Alert();
+        var alert = Driver.GetDriver().SwitchTo().Alert();
          alert.SendKeys(text);
     }
 
-    public static void SwitchToFrame(IWebDriver driver,By frame)
+    public static void SwitchToFrame(By frame)
     {
-        var targetFrame = driver.FindElement(frame);
-        driver.SwitchTo().Frame(targetFrame);
+        var targetFrame = Driver.GetDriver().FindElement(frame);
+        Driver.GetDriver().SwitchTo().Frame(targetFrame);
     }
     public void ScrollToElement(IWebDriver driver,By element)
     {
         var targetElement = driver.FindElement(element);
        ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
     }
-    public static void VerifyElementDisplayed(IWebDriver driver,By element)
+    public static void VerifyElementDisplayed(By element)
     {
-        var targetElement = driver.FindElement(element);
+        var targetElement = Driver.GetDriver().FindElement(element);
         try {
             Assert.True(targetElement.Displayed, $"Element not visible: {targetElement} ");
         } catch (NoSuchElementException e) {
@@ -113,11 +113,11 @@ public class UIHelper
    
         
     }
-    public static IWebElement WaitUntilElementExists(IWebDriver driver, By elementLocator, int timeout = 10)
+    public static IWebElement WaitUntilElementExists( By elementLocator, int timeout = 10)
     {
         try
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            var wait = new WebDriverWait(Driver.GetDriver(), TimeSpan.FromSeconds(timeout));
             return wait.Until(ExpectedConditions.ElementExists(elementLocator));
         }
         catch (NoSuchElementException)
@@ -127,11 +127,11 @@ public class UIHelper
         }
     }
     
-    public static IWebElement WaitUntilElementVisible(IWebDriver driver, By elementLocator, int timeout = 10)
+    public static IWebElement WaitUntilElementVisible(By elementLocator, int timeout = 10)
     {
         try
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            var wait = new WebDriverWait(Driver.GetDriver(), TimeSpan.FromSeconds(timeout));
             return wait.Until(ExpectedConditions.ElementIsVisible(elementLocator));
         }
         catch (NoSuchElementException)
@@ -141,11 +141,11 @@ public class UIHelper
         }
     }
     
-    public static IWebElement WaitUntilElementClickable(IWebDriver driver, By elementLocator, int timeout = 10)
+    public static IWebElement WaitUntilElementClickable( By elementLocator, int timeout = 10)
     {
         try
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+            var wait = new WebDriverWait(Driver.GetDriver(), TimeSpan.FromSeconds(timeout));
             return wait.Until(ExpectedConditions.ElementToBeClickable(elementLocator));
         }
         catch (NoSuchElementException)
@@ -154,12 +154,12 @@ public class UIHelper
             throw;
         }
     }
-    public static void ClickAndWaitForPageToLoad(IWebDriver driver, By elementLocator, int timeout = 10)
+    public static void ClickAndWaitForPageToLoad(By elementLocator, int timeout = 10)
     {
         try
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            var element = driver.FindElement(elementLocator);
+            var wait = new WebDriverWait(Driver.GetDriver(), TimeSpan.FromSeconds(timeout));
+            var element = Driver.GetDriver().FindElement(elementLocator);
             element.Click();
             wait.Until(ExpectedConditions.StalenessOf(element));
         }
@@ -170,10 +170,10 @@ public class UIHelper
         }
     }
 
-    public static List<String> GetTextofElements(IWebDriver driver,By element)
+    public static List<String> GetTextofElements(By element)
     {
         var list = new List<string>();
-        ReadOnlyCollection<IWebElement> elements = driver.FindElements(element);
+        ReadOnlyCollection<IWebElement> elements = Driver.GetDriver().FindElements(element);
         foreach (IWebElement eachElement in elements)
         {
             list.Add(eachElement.Text);

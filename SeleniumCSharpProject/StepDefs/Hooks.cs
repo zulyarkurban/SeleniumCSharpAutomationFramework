@@ -12,8 +12,7 @@ namespace SeleniumCSharpProject.StepDefs;
 [Binding]
 public class Hooks
 {
-    // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-    
+
     [BeforeScenario]
     public void BeforeScenario()
     {

@@ -36,7 +36,7 @@ public  class GoogleSearchStepDefs
     [When(@"Click on first result")]
     public void WhenClickOnFirstResult()
     {
-        UIHelper.ClickButton(_driver,_homePage.ResultList);
+        UIHelper.ClickButton(_homePage.ResultList);
     }
 
     [Then(@"First result page title should contains ""(.*)""")]
@@ -51,7 +51,7 @@ public  class GoogleSearchStepDefs
     [Then(@"User should be able to see all the sub menu on the page")]
     public void ThenUserShouldBeAbleToSeeAllTheSubMenuOnThePage()
     {
-        List<string> list = UIHelper.GetTextofElements(_driver,_seleniumHomePage.SeleniumSubMenuLeftBar);
+        List<string> list = UIHelper.GetTextofElements(_seleniumHomePage.SeleniumSubMenuLeftBar);
         Console.WriteLine("Count of menu : "+list.Count);
         Assert.True(list.Count>0);
     }
