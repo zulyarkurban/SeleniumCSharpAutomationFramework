@@ -4,6 +4,6 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2f436f87_002Da430_002D4cc2_002Dab9b_002D8b87dc578ede/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::8CF2569A-3F37-410A-9A2F-990C9DABCAD4::net6.0::SeleniumCSharpProject.Features.GoogleSearchFunctionalityTestFeature.UserShouldBeAbleToSearchATextOnGoogle&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::8CF2569A-3F37-410A-9A2F-990C9DABCAD4::net6.0::SeleniumCSharpProject.Features.GoogleSearchFunctionalityTestFeature&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -8,16 +8,20 @@ namespace SeleniumCSharpProject.Utilities;
 
 public class Driver
 {
-    private static IWebDriver driver;
-
-    public static IWebDriver GetWebDriver()
+    private static IWebDriver driver = null;
+    private Driver(){}
+    public static IWebDriver GetDriver()
     {
-        //string homeDirector = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
-        //driver = new ChromeDriver(homeDirector+"/RiderProjects/SeleniumCSharpProject");
-        new DriverManager().SetUpDriver(new ChromeConfig());
-        var driver = new ChromeDriver();
+        if (driver == null)
+        {
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            driver = new ChromeDriver();  
+        }
         return driver;
     }
-    
-    
+
+    public static void TearDown()
+    {
+        driver.Close();
+    }
 }

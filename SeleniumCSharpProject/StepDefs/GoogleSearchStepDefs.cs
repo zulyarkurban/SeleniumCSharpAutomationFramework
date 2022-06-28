@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumCSharpProject.Pages;
 using SeleniumCSharpProject.Utilities;
@@ -10,10 +10,11 @@ using TechTalk.SpecFlow;
 namespace SeleniumCSharpProject.StepDefs;
 
 [Binding]
-public  class GoogleSearchStepDefs:Driver
+public  class GoogleSearchStepDefs
 {
     private readonly  GoogleHomePage  _homePage=new GoogleHomePage();
-    private readonly IWebDriver _driver = Driver.GetWebDriver();
+    private readonly SeleniumHomePage _seleniumHomePage = new SeleniumHomePage();
+    private readonly IWebDriver _driver = Driver.GetDriver();
     private  WebDriverWait _wait;
     [Given(@"Navigate to google")]
     public void GivenNavigateToGoogle()
@@ -30,16 +31,11 @@ public  class GoogleSearchStepDefs:Driver
         IWebElement searchInput  = _driver.FindElement(_homePage.SearchInput);
         searchInput.SendKeys(searchText+Keys.Enter);
         Console.WriteLine($"user entered {searchText}");
-
     }
 
     [When(@"Click on first result")]
     public void WhenClickOnFirstResult()
     {
-        //IWebElement searchResult = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(_homePage.ResultList));
-       // Console.WriteLine($"WebElement \"{searchResult.Text}\" iSpecFlows clicked");
-        //searchResult.Click();
-        
         UIHelper.ClickButton(_driver,_homePage.ResultList);
     }
 
@@ -50,7 +46,13 @@ public  class GoogleSearchStepDefs:Driver
         Console.WriteLine($"Page title is {pageTitle}");
         Assert.IsTrue(pageTitle.Contains(title));
         Console.WriteLine("Done....");
-        _driver.Close();
-       
+    }
+
+    [Then(@"User should be able to see all the sub menu on the page")]
+    public void ThenUserShouldBeAbleToSeeAllTheSubMenuOnThePage()
+    {
+        List<string> list = UIHelper.GetTextofElements(_driver,_seleniumHomePage.SeleniumSubMenuLeftBar);
+        Console.WriteLine("Count of menu : "+list.Count);
+        Assert.True(list.Count>0);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SeleniumCSharpProject.Utilities;
 using TechTalk.SpecFlow;
 
 namespace SeleniumCSharpProject.StepDefs;
@@ -23,5 +24,6 @@ public class Hooks
     public void AfterScenario()
     {
         Console.WriteLine("Hooks After Scenario....");
+        Driver.TearDown();
     }
 }

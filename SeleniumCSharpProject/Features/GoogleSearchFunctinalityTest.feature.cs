@@ -107,6 +107,44 @@ namespace SeleniumCSharpProject.Features
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User should be able to see all submenu list on the page")]
+        [NUnit.Framework.CategoryAttribute("Selenium")]
+        public void UserShouldBeAbleToSeeAllSubmenuListOnThePage()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Selenium"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User should be able to see all submenu list on the page", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 10
+  this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 11
+    testRunner.Given("Navigate to google", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 12
+    testRunner.When("Enter the text to searchbar and click enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 13
+    testRunner.And("Click on first result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 14
+    testRunner.Then("First result page title should contains \"Test Automation\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 15
+    testRunner.Then("User should be able to see all the sub menu on the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

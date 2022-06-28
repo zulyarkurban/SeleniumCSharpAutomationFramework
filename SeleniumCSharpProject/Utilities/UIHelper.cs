@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using NUnit.Framework;
@@ -167,5 +168,17 @@ public class UIHelper
             Console.WriteLine("Element with locator: '" + elementLocator + "' was not found in current context page.");
             throw;
         }
+    }
+
+    public static List<String> GetTextofElements(IWebDriver driver,By element)
+    {
+        var list = new List<string>();
+        ReadOnlyCollection<IWebElement> elements = driver.FindElements(element);
+        foreach (IWebElement eachElement in elements)
+        {
+            list.Add(eachElement.Text);
+            //Console.WriteLine(eachElement.Text);
+        }
+        return list;
     }
 }
