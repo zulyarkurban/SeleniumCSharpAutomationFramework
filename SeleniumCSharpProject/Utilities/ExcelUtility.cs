@@ -83,14 +83,9 @@ public class ExcelUtility
 
     public void AddNewColumnAndItsData(string columnName, string cellData)
     {
-        //SetCellData(columnName,rowCount(),columnCount());
-        //SetCellData(cellData,rowCount(),GetRowNumber(GetDataArray(),columnName));
-        
         SetCellData(columnName,0,columnCount());
         SetCellData(cellData,1,columnCount()-1);
-       
-        // int columnNo=excelUtility.GetRowNumber(excelUtility.GetDataArray(),"Arrival time");
-        
+
     }
 
     public void SetCellData(String value, int rowNum, int colNum) {
